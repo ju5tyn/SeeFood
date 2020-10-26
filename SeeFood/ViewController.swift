@@ -14,6 +14,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var thinkLabel: UILabel!
+    
+    @IBOutlet weak var oobeLabel: UILabel!
+    @IBOutlet weak var oobeArrow: UIImageView!
+    
     
     
     
@@ -29,7 +35,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.sourceType = .camera
         imagePicker.allowsEditing = false
         
+        
+        imageView.layer.cornerRadius = 10
     }
+
     
 
     //MARK: - IBActions
@@ -48,6 +57,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
             imageView.image = userPickedImage
             
+            oobeArrow.isHidden = true
+            oobeLabel.isHidden = true
+            
+            
             guard let ciimage = CIImage(image: userPickedImage) else {
                 fatalError("Could not convert")
             }
@@ -58,6 +71,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         
         imagePicker.dismiss(animated: true, completion: nil)
+        UIView.animate(withDuration: 50, delay: 5) { [self] in
+            imageViewTopConstraint.constant = 130
+            
+        }
+        
         
     }
     
@@ -71,17 +89,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             fatalError("Broken coreml")
         }
         
-        let request = VNCoreMLRequest(model: model) { (request, error) in
+        let request = VNCoreMLRequest(model: model) { [self] (request, error) in
             
             guard let results = request.results as? [VNClassificationObservation] else{
                 fatalError("vnrequest error")
             }
             
-            let result = results.first
+            let result = results.first?.identifier.description
             
-            
-        print(results)
-            
+            thinkLabel.text = "I think this is \(result)"
         }
         
         let handler = VNImageRequestHandler(ciImage: image)
