@@ -47,7 +47,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SeeFood" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raE-EJ-fY1">
-                                <rect key="frame" x="87.666666666666686" y="76" width="200" height="29"/>
+                                <rect key="frame" x="87.666666666666686" y="76" width="200" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="7Ux-B6-Cqs"/>
                                 </constraints>
@@ -72,11 +72,11 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="bold"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09k-yR-KyR">
-                                <rect key="frame" x="87.666666666666686" y="645.33333333333337" width="200" height="28.666666666666629"/>
+                                <rect key="frame" x="87.666666666666686" y="640" width="200" height="19.333333333333371"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="TXQ-Hq-e8s"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="24"/>
+                                <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -89,7 +89,6 @@
                             <constraint firstItem="b8c-KC-ZZJ" firstAttribute="centerY" secondItem="ZLl-c2-d4k" secondAttribute="centerY" id="O6S-Fv-iHP"/>
                             <constraint firstItem="ZLl-c2-d4k" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="180" id="WXW-we-c0J"/>
                             <constraint firstItem="b8c-KC-ZZJ" firstAttribute="centerX" secondItem="ZLl-c2-d4k" secondAttribute="centerX" id="Ybp-C6-Oca"/>
-                            <constraint firstItem="j4d-SK-vTJ" firstAttribute="top" secondItem="09k-yR-KyR" secondAttribute="bottom" constant="24" id="arq-4N-WE8"/>
                             <constraint firstItem="LcN-c1-arl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="d9y-Xj-hlK"/>
                             <constraint firstItem="j4d-SK-vTJ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-20" id="ebc-Ot-CQn"/>
                             <constraint firstItem="raE-EJ-fY1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fbj-5d-ZPe"/>
@@ -98,6 +97,7 @@
                             <constraint firstItem="raE-EJ-fY1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="pnW-2Q-6yR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="j4d-SK-vTJ" secondAttribute="trailing" constant="25" id="v7e-mH-nFd"/>
                             <constraint firstItem="ZLl-c2-d4k" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="yjR-4a-o6B"/>
+                            <constraint firstItem="09k-yR-KyR" firstAttribute="top" secondItem="ZLl-c2-d4k" secondAttribute="bottom" constant="20" id="zQx-xU-klp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mGf-wP-1RZ">

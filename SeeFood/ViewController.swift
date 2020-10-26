@@ -95,9 +95,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 fatalError("vnrequest error")
             }
             
-            let result = results.first?.identifier.description
+            if let result = results.first{
+                if Int(result.confidence * 100) > 1 {
+                    do {
+                        thinkLabel.text = "I think this is \(result.identifier)"
+                    }catch{
+                        print(error)
+                    }
+                }
+                
+            }
             
-            thinkLabel.text = "I think this is \(result)"
+            
         }
         
         let handler = VNImageRequestHandler(ciImage: image)
