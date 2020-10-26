@@ -36,7 +36,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func takePhotoTapped(_ sender: UIButton) {
         
         present(imagePicker, animated: true, completion: nil)
-        
+        //l
     }
     
     
