@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3ABE4D6125475B7500046208 /* SF-Compact-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3ABE4D6025475B7500046208 /* SF-Compact-Text-Bold.otf */; };
 		3ABE4D6425475BF400046208 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABE4D6325475BF400046208 /* ButtonStyle.swift */; };
+		3AC68463254824D4008C4684 /* Food101.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3AC68462254824D3008C4684 /* Food101.mlmodel */; };
 		3ADC69B424CB486C00785CC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC69B324CB486C00785CC5 /* AppDelegate.swift */; };
 		3ADC69B624CB486C00785CC5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC69B524CB486C00785CC5 /* SceneDelegate.swift */; };
 		3ADC69B824CB486C00785CC5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC69B724CB486C00785CC5 /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		3ABE4D6025475B7500046208 /* SF-Compact-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Bold.otf"; sourceTree = "<group>"; };
 		3ABE4D6325475BF400046208 /* ButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
+		3AC68462254824D3008C4684 /* Food101.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Food101.mlmodel; sourceTree = "<group>"; };
 		3ADC69B024CB486C00785CC5 /* SeeFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeeFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ADC69B324CB486C00785CC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3ADC69B524CB486C00785CC5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				3ABE4D5F25475B6500046208 /* Resources */,
 				3ADC69BE24CB487500785CC5 /* LaunchScreen.storyboard */,
 				3ADC69C124CB487500785CC5 /* Info.plist */,
+				3AC68462254824D3008C4684 /* Food101.mlmodel */,
 				3ADC69C724CB4A4400785CC5 /* Inceptionv3.mlmodel */,
 			);
 			path = SeeFood;
@@ -159,6 +162,7 @@
 				3ADC69B824CB486C00785CC5 /* ViewController.swift in Sources */,
 				3ADC69C824CB4A4500785CC5 /* Inceptionv3.mlmodel in Sources */,
 				3ABE4D6425475BF400046208 /* ButtonStyle.swift in Sources */,
+				3AC68463254824D4008C4684 /* Food101.mlmodel in Sources */,
 				3ADC69B424CB486C00785CC5 /* AppDelegate.swift in Sources */,
 				3ADC69B624CB486C00785CC5 /* SceneDelegate.swift in Sources */,
 			);

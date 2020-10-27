@@ -85,7 +85,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func detect(image: CIImage){
         
-        guard let model = try? VNCoreMLModel(for: Inceptionv3().model) else {
+        guard let model = try? VNCoreMLModel(for: Food101(configuration: MLModelConfiguration()).model) else {
             fatalError("Broken coreml")
         }
         
@@ -97,11 +97,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             
             if let result = results.first{
                 if Int(result.confidence * 100) > 1 {
-                    do {
-                        thinkLabel.text = "I think this is \(result.identifier)"
-                    }catch{
-                        print(error)
-                    }
+                    thinkLabel.text = "I think this is \(result.identifier)"
                 }
                 
             }
