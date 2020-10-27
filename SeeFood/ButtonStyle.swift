@@ -17,6 +17,7 @@ class ButtonStyle: UIButton {
     
     var topGradient: String?
     var bottomGradient: String?
+    var textColor: UIColor? = UIColor.white
     
     required init?(coder aDecoder: NSCoder) {
         self.hue = 0.5
@@ -28,6 +29,13 @@ class ButtonStyle: UIButton {
         
         self.isOpaque = false
         self.backgroundColor = .clear
+        self.titleLabel?.textColor = textColor
+        
+        titleLabel!.layer.shadowColor = UIColor.black.cgColor
+            titleLabel!.layer.shadowOffset = CGSize(width: 0, height: 2)
+        titleLabel!.layer.shadowOpacity = 0.4
+        titleLabel!.layer.shadowRadius = 5
+        titleLabel!.layer.masksToBounds = false
         
         
     }
@@ -40,7 +48,7 @@ class ButtonStyle: UIButton {
         // 1
         let outerColor = UIColor(
             hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
-        let shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+        //let shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
       
         // 2
         let outerMargin: CGFloat = 5.0
@@ -48,8 +56,8 @@ class ButtonStyle: UIButton {
         // 3
         let outerPath = createRoundedRectPath(for: outerRect, radius: 12.0)
       
-        var outerBottom = UIColor.red
-        var outerTop = UIColor.systemPink
+        var outerBottom = UIColor(named: topGradient!)
+        var outerTop = UIColor(named: bottomGradient!)
        
         // 4
         if state != .highlighted {
@@ -60,11 +68,11 @@ class ButtonStyle: UIButton {
             context.fillPath()
             context.restoreGState()
             
-            context.setShadow(offset: CGSize(width: 0, height: 2),
-            blur: 3.0, color: shadowColor.cgColor)
+            //context.setShadow(offset: CGSize(width: 0, height: 2),
+            //blur: 3.0, color: shadowColor.cgColor)
             
-            outerBottom = UIColor.systemPink
-            outerTop = UIColor.red
+            outerBottom = UIColor(named: bottomGradient!)
+            outerTop = UIColor(named: topGradient!)
             
             
       }
@@ -82,8 +90,9 @@ class ButtonStyle: UIButton {
         context.saveGState()
         context.addPath(outerPath)
         context.clip()
+
         drawLinearGradient(context: context, rect: outerRect,
-                           startColor: outerBottom.cgColor, endColor: outerTop.cgColor)
+                           startColor: outerTop!.cgColor, endColor: outerBottom!.cgColor)
         context.restoreGState()
 
     }

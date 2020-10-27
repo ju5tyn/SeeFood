@@ -20,7 +20,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var oobeLabel: UILabel!
     @IBOutlet weak var oobeArrow: UIImageView!
     
-    
+    @IBOutlet weak var scanButton: ButtonStyle!
+    @IBOutlet weak var cameraButton: ButtonStyle!
+    @IBOutlet weak var buttonStackView: UIStackView!
     
     
     let imagePicker = UIImagePickerController()
@@ -30,6 +32,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scanButton.topGradient = "StartTop"
+        scanButton.bottomGradient = "StartBottom"
+        scanButton.setTitleColor(UIColor.black, for: .normal)
+        
+        
+        cameraButton.topGradient = "CamTop"
+        cameraButton.bottomGradient = "CamBottom"
+        cameraButton.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
         
         imagePicker.delegate = self
         imagePicker.sourceType = .camera
@@ -42,12 +53,49 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
 
     //MARK: - IBActions
-    @IBAction func takePhotoTapped(_ sender: UIButton) {
+    @IBAction func cameraButtonTapped(_ sender: UIButton) {
         
         present(imagePicker, animated: true, completion: nil)
         //l
     }
     
+    @IBAction func scanButtonTapped(_ sender: Any) {
+        
+        
+        UIView.animate(withDuration: 0.3) { [self] in
+            if cameraButton.alpha == 0{
+                
+                //camera button shown
+                cameraButton.alpha = 1
+                scanButton.topGradient = "StartTop"
+                scanButton.bottomGradient = "StartBottom"
+                scanButton.setTitle("Start Scanning", for: .normal)
+                scanButton.setTitleColor(UIColor.black, for: .normal)
+                scanButton.setNeedsDisplay()
+            
+            }else{
+            
+                //camera button hidden
+                cameraButton.alpha = 0
+                scanButton.topGradient = "StopTop"
+                scanButton.bottomGradient = "StopBottom"
+                scanButton.setTitleColor(UIColor.white, for: .normal)
+                scanButton.setTitle("Stop Scanning", for: .normal)
+                scanButton.setNeedsDisplay()
+            
+            }
+        }
+        
+        UIView.animate(withDuration: 0.3) { [self] in
+            cameraButton.isHidden.toggle()
+            buttonStackView.layoutIfNeeded()
+            
+        }
+        
+        
+    }
+    
+
     
     //MARK: - Imagepickercontroller
     

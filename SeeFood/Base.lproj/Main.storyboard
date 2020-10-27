@@ -33,21 +33,8 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="keyPath" value=""/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4d-SK-vTJ" customClass="ButtonStyle" customModule="SeeFood" customModuleProvider="target">
-                                <rect key="frame" x="25" y="698" width="325" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="LS8-aJ-XKL"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="20"/>
-                                <state key="normal" title="Take Photo">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="takePhotoTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sET-BR-9Fw"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SeeFood" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raE-EJ-fY1">
-                                <rect key="frame" x="87.666666666666686" y="76" width="200" height="28"/>
+                                <rect key="frame" x="87.666666666666686" y="76" width="200" height="28.666666666666671"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="7Ux-B6-Cqs"/>
                                 </constraints>
@@ -61,6 +48,42 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PcG-Uk-gyR">
+                                <rect key="frame" x="20" y="703" width="335" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4d-SK-vTJ" customClass="ButtonStyle" customModule="SeeFood" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="265" height="60"/>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="20"/>
+                                        <state key="normal" title="Start Scanning">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="heavy"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="scanButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wIJ-zJ-1v5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXw-1b-47b" customClass="ButtonStyle" customModule="SeeFood" customModuleProvider="target">
+                                        <rect key="frame" x="265" y="0.0" width="70" height="60"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="DIc-6b-pAt"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <imageReference key="image" image="camera.fill" catalog="system" symbolScale="medium"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="heavy"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cameraButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZJS-Fo-cLo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Laq-FN-617"/>
+                                </constraints>
+                            </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LcN-c1-arl">
                                 <rect key="frame" x="172.66666666666666" y="419" width="30" height="27.666666666666686"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -72,7 +95,7 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="bold"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09k-yR-KyR">
-                                <rect key="frame" x="87.666666666666686" y="640" width="200" height="19.333333333333371"/>
+                                <rect key="frame" x="87.666666666666686" y="640" width="200" height="18.666666666666629"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="TXQ-Hq-e8s"/>
                                 </constraints>
@@ -85,17 +108,17 @@
                         <color key="backgroundColor" red="0.07027284263959388" green="0.07027284263959388" blue="0.07027284263959388" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="LcN-c1-arl" firstAttribute="top" secondItem="b8c-KC-ZZJ" secondAttribute="bottom" constant="8" id="FKV-yR-b2M"/>
-                            <constraint firstItem="j4d-SK-vTJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="LmK-M8-ijm"/>
+                            <constraint firstItem="PcG-Uk-gyR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="J3o-em-pb0"/>
                             <constraint firstItem="b8c-KC-ZZJ" firstAttribute="centerY" secondItem="ZLl-c2-d4k" secondAttribute="centerY" id="O6S-Fv-iHP"/>
                             <constraint firstItem="ZLl-c2-d4k" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="180" id="WXW-we-c0J"/>
                             <constraint firstItem="b8c-KC-ZZJ" firstAttribute="centerX" secondItem="ZLl-c2-d4k" secondAttribute="centerX" id="Ybp-C6-Oca"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PcG-Uk-gyR" secondAttribute="trailing" constant="20" id="ccN-Ry-lok"/>
                             <constraint firstItem="LcN-c1-arl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="d9y-Xj-hlK"/>
-                            <constraint firstItem="j4d-SK-vTJ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-20" id="ebc-Ot-CQn"/>
                             <constraint firstItem="raE-EJ-fY1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fbj-5d-ZPe"/>
                             <constraint firstItem="09k-yR-KyR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gac-4y-ZVA"/>
                             <constraint firstItem="ZLl-c2-d4k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="nmo-Zl-Sug"/>
                             <constraint firstItem="raE-EJ-fY1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="pnW-2Q-6yR"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="j4d-SK-vTJ" secondAttribute="trailing" constant="25" id="v7e-mH-nFd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PcG-Uk-gyR" secondAttribute="bottom" constant="15" id="xeK-x8-Tkk"/>
                             <constraint firstItem="ZLl-c2-d4k" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="yjR-4a-o6B"/>
                             <constraint firstItem="09k-yR-KyR" firstAttribute="top" secondItem="ZLl-c2-d4k" secondAttribute="bottom" constant="20" id="zQx-xU-klp"/>
                         </constraints>
@@ -106,20 +129,24 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="buttonStackView" destination="PcG-Uk-gyR" id="EJ1-Es-Ei0"/>
+                        <outlet property="cameraButton" destination="uXw-1b-47b" id="QsV-MD-pep"/>
                         <outlet property="imageView" destination="ZLl-c2-d4k" id="Isx-9j-RJY"/>
                         <outlet property="imageViewTopConstraint" destination="WXW-we-c0J" id="whj-qe-1wq"/>
                         <outlet property="oobeArrow" destination="LcN-c1-arl" id="2Gd-tk-KBr"/>
                         <outlet property="oobeLabel" destination="b8c-KC-ZZJ" id="S3l-VS-adV"/>
+                        <outlet property="scanButton" destination="j4d-SK-vTJ" id="cqT-nj-D92"/>
                         <outlet property="thinkLabel" destination="09k-yR-KyR" id="hnT-m8-MZb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042.0289855072465" y="138.61607142857142"/>
+            <point key="canvasLocation" x="1040.8" y="138.17733990147784"/>
         </scene>
     </scenes>
     <resources>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
+        <image name="camera.fill" catalog="system" width="128" height="94"/>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
