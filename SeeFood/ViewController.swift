@@ -9,23 +9,31 @@
 import UIKit
 import CoreML
 import Vision
+import AVFoundation
+
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     
+    @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var imageViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var thinkLabel: UILabel!
     
     @IBOutlet weak var oobeLabel: UILabel!
     @IBOutlet weak var oobeArrow: UIImageView!
+
     
     @IBOutlet weak var scanButton: ButtonStyle!
     @IBOutlet weak var cameraButton: ButtonStyle!
+    @IBOutlet weak var cameraButtonWidthConstaint: NSLayoutConstraint!
     @IBOutlet weak var buttonStackView: UIStackView!
     
     
     let imagePicker = UIImagePickerController()
+    
+    var captureSession: AVCaptureSession!
+    var stillImageOutput: AVCapturePhotoOutput!
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer!
 
     
     
@@ -47,22 +55,109 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.allowsEditing = false
         
         
-        imageView.layer.cornerRadius = 10
+        previewView.layer.cornerRadius = 10
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        captureSession = AVCaptureSession()
+        captureSession.sessionPreset = .photo
+        
+        guard let backCamera = AVCaptureDevice.default(for: AVMediaType.video) else{
+            print("error accessing back camera")
+            return
+        }
+        
+        do{
+            let input = try AVCaptureDeviceInput(device: backCamera)
+            stillImageOutput = AVCapturePhotoOutput()
+            if captureSession.canAddInput(input) && captureSession.canAddOutput(stillImageOutput){
+                captureSession.addInput(input)
+                captureSession.addOutput(stillImageOutput)
+                setupLivePreview()
+            }
+        }catch{
+            print(error)
+        }
+        
+        
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.captureSession.stopRunning()
+    }
     
 
     //MARK: - IBActions
     @IBAction func cameraButtonTapped(_ sender: UIButton) {
+ 
+        oobeLabel.isHidden=true
+        oobeArrow.isHidden=true
+        //present(imagePicker, animated: true, completion: nil)
         
-        present(imagePicker, animated: true, completion: nil)
-        //l
+        //let settings = AVCapture
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0.5) { [self] in
+            
+            oobeLabel.alpha = 0
+            oobeArrow.alpha = 0
+ 
+            if scanButton.alpha == 0{
+                
+                //cameraButtonWidthConstaint.constant = 70
+                //scanning button shown
+                
+                //code for button ui
+                scanButton.alpha = 1
+                cameraButton.topGradient = "CamTop"
+                cameraButton.bottomGradient = "CamBottom"
+                scanButton.setNeedsDisplay()
+                
+                //code for action
+                
+
+                
+                
+            
+            }else{
+                cameraButtonWidthConstaint = nil
+                //scanning button hidden
+                
+                //code for button ui
+                scanButton.alpha = 0
+                cameraButton.topGradient = "StopTop"
+                cameraButton.bottomGradient = "StopBottom"
+                scanButton.setNeedsDisplay()
+                
+                //code for action
+                
+                
+
+            }
+            scanButton.isHidden.toggle()
+            buttonStackView.layoutIfNeeded()
+
+        }
+        
+        
+        
     }
     
     @IBAction func scanButtonTapped(_ sender: Any) {
         
         
-        UIView.animate(withDuration: 0.3) { [self] in
+        
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0.5) { [self] in
+            
+            oobeLabel.alpha = 0
+            oobeArrow.alpha = 0
+            
+            
+            
             if cameraButton.alpha == 0{
                 
                 //camera button shown
@@ -72,6 +167,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 scanButton.setTitle("Start Scanning", for: .normal)
                 scanButton.setTitleColor(UIColor.black, for: .normal)
                 scanButton.setNeedsDisplay()
+                
+
             
             }else{
             
@@ -82,17 +179,36 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 scanButton.setTitleColor(UIColor.white, for: .normal)
                 scanButton.setTitle("Stop Scanning", for: .normal)
                 scanButton.setNeedsDisplay()
+                
+                
+                
+                
+                
             
             }
-        }
-        
-        UIView.animate(withDuration: 0.3) { [self] in
             cameraButton.isHidden.toggle()
             buttonStackView.layoutIfNeeded()
-            
+
         }
         
         
+        
+    }
+    
+    func setupLivePreview(){
+        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        videoPreviewLayer.videoGravity = .resizeAspectFill
+        videoPreviewLayer.connection?.videoOrientation = .portrait
+        videoPreviewLayer.cornerRadius = 10
+        previewView.layer.addSublayer(videoPreviewLayer)
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.captureSession.startRunning()
+            
+            DispatchQueue.main.async {
+                self.videoPreviewLayer.frame = self.previewView.bounds
+            }
+        }
     }
     
 
@@ -119,8 +235,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         
         imagePicker.dismiss(animated: true, completion: nil)
-        UIView.animate(withDuration: 50, delay: 5) { [self] in
-            imageViewTopConstraint.constant = 130
+        UIView.animate(withDuration: 50, delay: 5) {
+            print("hello")
             
         }
         
