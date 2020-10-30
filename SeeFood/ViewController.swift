@@ -12,7 +12,7 @@ import Vision
 import AVFoundation
 
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVCapturePhotoCaptureDelegate{
     
     
     @IBOutlet weak var previewView: UIView!
@@ -56,6 +56,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         
         previewView.layer.cornerRadius = 10
+        imageView.layer.cornerRadius = 10
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -114,10 +115,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 cameraButton.topGradient = "CamTop"
                 cameraButton.bottomGradient = "CamBottom"
                 scanButton.setNeedsDisplay()
+                thinkLabel.alpha = 0
                 
                 //code for action
+                videoPreviewLayer.isHidden = false
+                imageView.image = nil
                 
-
                 
                 
             
@@ -131,13 +134,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 cameraButton.bottomGradient = "StopBottom"
                 scanButton.setNeedsDisplay()
                 
+                
                 //code for action
+                videoPreviewLayer.isHidden = true
+                let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+                stillImageOutput.capturePhoto(with: settings, delegate: self)
+                thinkLabel.alpha = 1
                 
                 
 
             }
             scanButton.isHidden.toggle()
-            buttonStackView.layoutIfNeeded()
+            //buttonStackView.layoutIfNeeded()
 
         }
         
@@ -168,8 +176,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 scanButton.setTitleColor(UIColor.black, for: .normal)
                 scanButton.setNeedsDisplay()
                 
+                thinkLabel.alpha = 0
 
-            
             }else{
             
                 //camera button hidden
@@ -181,11 +189,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 scanButton.setNeedsDisplay()
                 
                 
-                
-                
-                
+                thinkLabel.alpha = 1
+                  
+                let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+                stillImageOutput.capturePhoto(with: settings, delegate: self)
             
             }
+            
+            
+            
+            
             cameraButton.isHidden.toggle()
             buttonStackView.layoutIfNeeded()
 
@@ -213,47 +226,32 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
 
     
-    //MARK: - Imagepickercontroller
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         
-        if let userPickedImage = info[.originalImage] as? UIImage{
+        guard let imageData = photo.fileDataRepresentation() else { return }
+        let image = UIImage(data: imageData)
         
-            imageView.image = userPickedImage
-            
-            oobeArrow.isHidden = true
-            oobeLabel.isHidden = true
-            
-            
-            guard let ciimage = CIImage(image: userPickedImage) else {
-                fatalError("Could not convert")
-            }
-            
-            detect(image: ciimage)
-            
-            
+        if scanButton.isHidden{
+            imageView.image = image
         }
         
-        imagePicker.dismiss(animated: true, completion: nil)
-        UIView.animate(withDuration: 50, delay: 5) {
-            print("hello")
-            
+        detect(image: CIImage(cgImage: image!.cgImage!))
         }
-        
-        
-    }
-    
+   
+
     
     
     //MARK: - Detect
-    
+
+
     func detect(image: CIImage){
         
-        guard let model = try? VNCoreMLModel(for: Food101(configuration: MLModelConfiguration()).model) else {
+        guard let model = try? VNCoreMLModel(for: Inceptionv3(configuration: MLModelConfiguration()).model) else {
             fatalError("Broken coreml")
         }
         
-        let request = VNCoreMLRequest(model: model) { [self] (request, error) in
+        let request = VNCoreMLRequest(model: model) { (request, error) in
             
             guard let results = request.results as? [VNClassificationObservation] else{
                 fatalError("vnrequest error")
@@ -261,7 +259,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             
             if let result = results.first{
                 if Int(result.confidence * 100) > 1 {
-                    thinkLabel.text = "I think this is \(result.identifier)"
+                    self.thinkLabel.text = "I think this is \(result.identifier)"
                 }
                 
             }
@@ -277,15 +275,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }catch{
             print("Error handler")
         }
+        
+        if cameraButton.isHidden == true{
+            let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+            stillImageOutput.capturePhoto(with: settings, delegate: self)
+        }
     }
     
-    
-    
-    
-    
-    
-    
-    
+
     
 }
+
+    
+    
+    
+    
+
 
