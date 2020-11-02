@@ -10,6 +10,7 @@ import UIKit
 import CoreML
 import Vision
 import AVFoundation
+import LTMorphingLabel
 
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVCapturePhotoCaptureDelegate{
@@ -17,7 +18,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var thinkLabel: UILabel!
+    @IBOutlet weak var thinkLabel: LTMorphingLabel!
     
     @IBOutlet weak var oobeLabel: UILabel!
     @IBOutlet weak var oobeArrow: UIImageView!
@@ -39,6 +40,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        thinkLabel.morphingEffect = .evaporate
         
         scanButton.topGradient = "StartTop"
         scanButton.bottomGradient = "StartBottom"

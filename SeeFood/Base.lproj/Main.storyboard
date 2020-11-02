@@ -105,7 +105,7 @@
                                 <imageReference key="image" image="arrow.down" catalog="system" symbolScale="default"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Scanning..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09k-yR-KyR">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Scanning..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09k-yR-KyR" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
                                 <rect key="frame" x="87.666666666666686" y="640" width="200" height="18.666666666666629"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="TXQ-Hq-e8s"/>
@@ -154,7 +154,7 @@
                         <outlet property="oobeLabel" destination="b8c-KC-ZZJ" id="S3l-VS-adV"/>
                         <outlet property="previewView" destination="L4D-hg-xr2" id="V9l-gH-mTB"/>
                         <outlet property="scanButton" destination="j4d-SK-vTJ" id="cqT-nj-D92"/>
-                        <outlet property="thinkLabel" destination="09k-yR-KyR" id="hnT-m8-MZb"/>
+                        <outlet property="thinkLabel" destination="09k-yR-KyR" id="1Qb-jr-y6M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -162,6 +162,11 @@
             <point key="canvasLocation" x="1040.8" y="138.17733990147784"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="09k-yR-KyR">
+            <size key="intrinsicContentSize" width="115.66666666666667" height="18.666666666666668"/>
+        </designable>
+    </designables>
     <resources>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
