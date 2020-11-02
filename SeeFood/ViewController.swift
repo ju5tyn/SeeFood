@@ -113,6 +113,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 scanButton.alpha = 1
                 cameraButton.topGradient = "CamTop"
                 cameraButton.bottomGradient = "CamBottom"
+                cameraButton.setTitle(nil, for: .normal)
+                cameraButton.setImage(UIImage(systemName: "camera.fill"), for: .normal)
                 scanButton.setNeedsDisplay()
                 thinkLabel.alpha = 0
                 
@@ -123,13 +125,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }else{
                 isShowingPhoto = true
                 
+                
                 cameraButtonWidthConstaint = nil
                 //scanning button hidden
                 
                 //code for button ui
                 scanButton.alpha = 0
-                cameraButton.topGradient = "StopTop"
-                cameraButton.bottomGradient = "StopBottom"
+                cameraButton.topGradient = "DoneTop"
+                cameraButton.bottomGradient = "DoneBottom"
+                cameraButton.setTitle("Done", for: .normal)
+                cameraButton.setImage(nil, for: .normal)
                 scanButton.setNeedsDisplay()
                 
                 
@@ -263,6 +268,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 }
             }
         }
+        
         let handler = VNImageRequestHandler(ciImage: image)
         do{
             try handler.perform([request])
