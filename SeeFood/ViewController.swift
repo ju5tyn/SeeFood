@@ -35,6 +35,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var stillImageOutput: AVCapturePhotoOutput!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
 
+    var isScanning: Bool = false
+    var isShowingPhoto: Bool = false
     
     
     //MARK: - ViewDidLoad
@@ -105,12 +107,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //MARK: - Camera Button Pressed
     @IBAction func cameraButtonTapped(_ sender: UIButton) {
  
-      
+
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) { [self] in
             
             hideOOBE()
  
-            if scanButton.alpha == 0{
+            if isShowingPhoto{
+                isShowingPhoto = false
                 
                 //code for button ui
                 scanButton.alpha = 1
@@ -122,11 +125,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 //code for action
                 videoPreviewLayer.isHidden = false
                 imageView.image = nil
-                
-                
-                
             
             }else{
+                isShowingPhoto = true
+                
                 cameraButtonWidthConstaint = nil
                 //scanning button hidden
                 
@@ -163,7 +165,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             
             hideOOBE()
 
-            if cameraButton.alpha == 0{
+            if isScanning{
+                
+                isScanning = false
                 
                 //camera button shown
                 cameraButton.alpha = 1
@@ -177,6 +181,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
             }else{
             
+                isScanning = true
+                
                 //camera button hidden
                 cameraButton.alpha = 0
                 scanButton.topGradient = "StopTop"
