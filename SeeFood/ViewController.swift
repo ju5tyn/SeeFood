@@ -59,56 +59,58 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageView.layer.cornerRadius = 10
     }
     
+    //MARK: - ViewDidAppear
+    //Setup
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .photo
+        //creates capturesession with photo preset
         
-        guard let backCamera = AVCaptureDevice.default(for: AVMediaType.video) else{
-            print("error accessing back camera")
+        
+        guard let backCamera = AVCaptureDevice.default(for: AVMediaType.video) else{ print("Error Accessing Back Camera")
             return
         }
         
         do{
-            let input = try AVCaptureDeviceInput(device: backCamera)
+            let cameraInput = try AVCaptureDeviceInput(device: backCamera)
             stillImageOutput = AVCapturePhotoOutput()
-            if captureSession.canAddInput(input) && captureSession.canAddOutput(stillImageOutput){
-                captureSession.addInput(input)
+            
+            let canAddIO = captureSession.canAddInput(cameraInput) && captureSession.canAddOutput(stillImageOutput)
+            
+            if canAddIO{
+                captureSession.addInput(cameraInput)
                 captureSession.addOutput(stillImageOutput)
                 setupLivePreview()
             }
         }catch{
-            print(error)
+            print(error.localizedDescription)
         }
         
         
     }
+    
+    //MARK: - ViewWillDisappear
+    //remove capturesession when view disappears
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        //kills capture session in background
         self.captureSession.stopRunning()
     }
     
 
-    //MARK: - IBActions
+    //MARK: - Camera Button Pressed
     @IBAction func cameraButtonTapped(_ sender: UIButton) {
  
-        oobeLabel.isHidden=true
-        oobeArrow.isHidden=true
-        //present(imagePicker, animated: true, completion: nil)
-        
-        //let settings = AVCapture
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8,
-                       initialSpringVelocity: 0.5) { [self] in
+      
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) { [self] in
             
-            oobeLabel.alpha = 0
-            oobeArrow.alpha = 0
+            hideOOBE()
  
             if scanButton.alpha == 0{
-                
-                //cameraButtonWidthConstaint.constant = 70
-                //scanning button shown
                 
                 //code for button ui
                 scanButton.alpha = 1
@@ -153,19 +155,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
+    //MARK: - Scan Button Pressed
+    
     @IBAction func scanButtonTapped(_ sender: Any) {
         
-        
-        
-        
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8,
-                       initialSpringVelocity: 0.5) { [self] in
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) { [self] in
             
-            oobeLabel.alpha = 0
-            oobeArrow.alpha = 0
-            
-            
-            
+            hideOOBE()
+
             if cameraButton.alpha == 0{
                 
                 //camera button shown
@@ -195,10 +192,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 stillImageOutput.capturePhoto(with: settings, delegate: self)
             
             }
-            
-            
-            
-            
+
             cameraButton.isHidden.toggle()
             buttonStackView.layoutIfNeeded()
 
@@ -207,6 +201,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         
     }
+    
+    //MARK: - Hide info text
+    
+    func hideOOBE(){
+        oobeLabel.alpha = 0
+        oobeArrow.alpha = 0
+        
+    }
+    
+    //MARK: - Live Preview Setup
     
     func setupLivePreview(){
         videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
@@ -225,7 +229,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
 
-    
+    //MARK: - Set UIImage to Cam Output
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         
@@ -240,9 +244,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
    
 
-    
-    
-    //MARK: - Detect
+    //MARK: - Image scanning function
 
 
     func detect(image: CIImage){
@@ -252,30 +254,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         
         let request = VNCoreMLRequest(model: model) { (request, error) in
-            
             guard let results = request.results as? [VNClassificationObservation] else{
                 fatalError("vnrequest error")
             }
-            
             if let result = results.first{
                 if Int(result.confidence * 100) > 1 {
                     self.thinkLabel.text = "I think this is \(result.identifier)"
                 }
-                
             }
-            
-            
         }
-        
         let handler = VNImageRequestHandler(ciImage: image)
-        
-        
         do{
             try handler.perform([request])
         }catch{
             print("Error handler")
         }
         
+        //jank ass real time tracking
         if cameraButton.isHidden == true{
             let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
             stillImageOutput.capturePhoto(with: settings, delegate: self)
