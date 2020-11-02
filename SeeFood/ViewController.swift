@@ -28,9 +28,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var cameraButtonWidthConstaint: NSLayoutConstraint!
     @IBOutlet weak var buttonStackView: UIStackView!
     
-    
-    let imagePicker = UIImagePickerController()
-    
     var captureSession: AVCaptureSession!
     var stillImageOutput: AVCapturePhotoOutput!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
@@ -52,10 +49,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         cameraButton.bottomGradient = "CamBottom"
         cameraButton.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
         
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        imagePicker.allowsEditing = false
-        
+
         
         previewView.layer.cornerRadius = 10
         imageView.layer.cornerRadius = 10
