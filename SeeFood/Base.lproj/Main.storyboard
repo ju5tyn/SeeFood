@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
@@ -20,14 +20,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SeeFood" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L4D-hg-xr2">
-                                <rect key="frame" x="25" y="136" width="325" height="480"/>
+                                <rect key="frame" x="25" y="152" width="340" height="480"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZLl-c2-d4k">
-                                        <rect key="frame" x="0.0" y="0.0" width="325" height="480"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="340" height="480"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="keyPath" value=""/>
@@ -44,7 +44,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SeeFood" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raE-EJ-fY1">
-                                <rect key="frame" x="87.666666666666686" y="76" width="200" height="28.666666666666671"/>
+                                <rect key="frame" x="95" y="76" width="200" height="28.666666666666671"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="7Ux-B6-Cqs"/>
                                 </constraints>
@@ -53,10 +53,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PcG-Uk-gyR">
-                                <rect key="frame" x="20" y="703" width="335" height="60"/>
+                                <rect key="frame" x="20" y="735" width="350" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4d-SK-vTJ" customClass="ButtonStyle" customModule="SeeFood" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="265" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="60"/>
                                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="20"/>
                                         <state key="normal" title="Start Scanning">
@@ -68,7 +68,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXw-1b-47b" customClass="ButtonStyle" customModule="SeeFood" customModuleProvider="target">
-                                        <rect key="frame" x="265" y="0.0" width="70" height="60"/>
+                                        <rect key="frame" x="280" y="0.0" width="70" height="60"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="DIc-6b-pAt"/>
@@ -96,7 +96,7 @@
                                 </constraints>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LcN-c1-arl">
-                                <rect key="frame" x="175" y="394.66666666666669" width="25" height="23"/>
+                                <rect key="frame" x="182.66666666666666" y="675.66666666666663" width="25" height="23"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="6Cj-H4-rfb"/>
@@ -106,7 +106,7 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Scanning..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09k-yR-KyR" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
-                                <rect key="frame" x="87.666666666666686" y="640" width="200" height="18.666666666666629"/>
+                                <rect key="frame" x="95" y="672" width="200" height="18.666666666666629"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="TXQ-Hq-e8s"/>
                                 </constraints>
@@ -114,8 +114,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the button below to add an image" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8c-KC-ZZJ">
-                                <rect key="frame" x="43" y="366.33333333333331" width="289" height="19.333333333333314"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap a button below to scan an object" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="b8c-KC-ZZJ">
+                                <rect key="frame" x="0.0" y="647.33333333333337" width="390" height="19.333333333333371"/>
                                 <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -128,11 +128,13 @@
                             <constraint firstItem="PcG-Uk-gyR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="J3o-em-pb0"/>
                             <constraint firstItem="L4D-hg-xr2" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-25" id="Jk2-wn-Bat"/>
                             <constraint firstItem="PcG-Uk-gyR" firstAttribute="top" secondItem="09k-yR-KyR" secondAttribute="bottom" constant="44.329999999999998" id="R56-lO-nDk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="b8c-KC-ZZJ" secondAttribute="trailing" id="S2s-RB-ShB"/>
                             <constraint firstItem="b8c-KC-ZZJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YTw-wF-Lxx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PcG-Uk-gyR" secondAttribute="trailing" constant="20" id="ccN-Ry-lok"/>
                             <constraint firstItem="LcN-c1-arl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="d9y-Xj-hlK"/>
-                            <constraint firstItem="b8c-KC-ZZJ" firstAttribute="centerY" secondItem="L4D-hg-xr2" secondAttribute="centerY" id="edd-9g-aJh"/>
+                            <constraint firstItem="b8c-KC-ZZJ" firstAttribute="centerY" secondItem="L4D-hg-xr2" secondAttribute="centerY" constant="265" id="edd-9g-aJh"/>
                             <constraint firstItem="raE-EJ-fY1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fbj-5d-ZPe"/>
+                            <constraint firstItem="b8c-KC-ZZJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fd4-5I-VDI"/>
                             <constraint firstItem="09k-yR-KyR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gac-4y-ZVA"/>
                             <constraint firstItem="L4D-hg-xr2" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-30" id="l8s-nh-o5h"/>
                             <constraint firstItem="raE-EJ-fY1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="pnW-2Q-6yR"/>

@@ -65,16 +65,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidAppear(animated)
         
         captureSession = AVCaptureSession()
-        captureSession.sessionPreset = .photo
+        captureSession.sessionPreset = .hd1280x720
         //creates capturesession with photo preset
         
         
-        guard let backCamera = AVCaptureDevice.default(for: AVMediaType.video) else{ print("Error Accessing Back Camera")
-            return
-        }
+        let videoDevice = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .back).devices.first
         
         do{
-            let cameraInput = try AVCaptureDeviceInput(device: backCamera)
+            let cameraInput = try AVCaptureDeviceInput(device: videoDevice!)
             stillImageOutput = AVCapturePhotoOutput()
             
             let canAddIO = captureSession.canAddInput(cameraInput) && captureSession.canAddOutput(stillImageOutput)
@@ -90,6 +88,92 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         
     }
+    
+    //MARK: - Live Preview Setup
+    
+    func setupLivePreview(){
+        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        videoPreviewLayer.videoGravity = .resizeAspectFill
+        videoPreviewLayer.connection?.videoOrientation = .portrait
+        videoPreviewLayer.cornerRadius = 10
+        previewView.layer.addSublayer(videoPreviewLayer)
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.captureSession.startRunning()
+            
+            DispatchQueue.main.async {
+                self.videoPreviewLayer.frame = self.previewView.bounds
+            }
+        }
+    }
+    
+
+    //MARK: - Set UIImage to Cam Output
+    
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        
+        guard let imageData = photo.fileDataRepresentation() else { return }
+        let image = UIImage(data: imageData)
+        
+        if scanButton.isHidden{
+            imageView.image = image
+        }
+        
+        detect(image: CIImage(cgImage: image!.cgImage!))
+        }
+   
+    
+    func photoOutput(_ output: AVCapturePhotoOutput, willCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
+        // dispose system shutter sound
+        AudioServicesDisposeSystemSoundID(1108)
+    }
+    
+    
+    
+    //MARK: - Image scanning function
+
+
+    func detect(image: CIImage){
+        
+        guard let model = try? VNCoreMLModel(for: Inceptionv3(configuration: MLModelConfiguration()).model) else {
+            fatalError("Broken coreml")
+        }
+        
+        let request = VNCoreMLRequest(model: model) { (request, error) in
+            guard let results = request.results as? [VNClassificationObservation] else{
+                fatalError("vnrequest error")
+            }
+            if let result = results.first{
+                if Int(result.confidence * 100) > 1 {
+                    self.thinkLabel.text = "I think this is \(result.identifier)"
+                }
+            }
+        }
+        
+        let handler = VNImageRequestHandler(ciImage: image)
+        do{
+            try handler.perform([request])
+        }catch{
+            print("Error handler")
+        }
+        
+        //jank ass real time tracking
+        if cameraButton.isHidden == true{
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                
+                let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+                self.stillImageOutput.capturePhoto(with: settings, delegate: self)
+                
+            }
+            
+        }
+    }
+    
+
+    
+
+
     
     //MARK: - ViewWillDisappear
     //remove capturesession when view disappears
@@ -111,6 +195,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
  
             if isShowingPhoto{
                 isShowingPhoto = false
+                
+                thinkLabel.text = "Scanning..."
                 
                 //code for button ui
                 scanButton.alpha = 1
@@ -218,81 +304,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
-    //MARK: - Live Preview Setup
+
     
-    func setupLivePreview(){
-        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        videoPreviewLayer.videoGravity = .resizeAspectFill
-        videoPreviewLayer.connection?.videoOrientation = .portrait
-        videoPreviewLayer.cornerRadius = 10
-        previewView.layer.addSublayer(videoPreviewLayer)
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.captureSession.startRunning()
-            
-            DispatchQueue.main.async {
-                self.videoPreviewLayer.frame = self.previewView.bounds
-            }
-        }
-    }
-    
-
-    //MARK: - Set UIImage to Cam Output
-    
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        
-        guard let imageData = photo.fileDataRepresentation() else { return }
-        let image = UIImage(data: imageData)
-        
-        if scanButton.isHidden{
-            imageView.image = image
-        }
-        
-        detect(image: CIImage(cgImage: image!.cgImage!))
-        }
-   
-
-    //MARK: - Image scanning function
-
-
-    func detect(image: CIImage){
-        
-        guard let model = try? VNCoreMLModel(for: Inceptionv3(configuration: MLModelConfiguration()).model) else {
-            fatalError("Broken coreml")
-        }
-        
-        let request = VNCoreMLRequest(model: model) { (request, error) in
-            guard let results = request.results as? [VNClassificationObservation] else{
-                fatalError("vnrequest error")
-            }
-            if let result = results.first{
-                if Int(result.confidence * 100) > 1 {
-                    self.thinkLabel.text = "I think this is \(result.identifier)"
-                }
-            }
-        }
-        
-        let handler = VNImageRequestHandler(ciImage: image)
-        do{
-            try handler.perform([request])
-        }catch{
-            print("Error handler")
-        }
-        
-        //jank ass real time tracking
-        if cameraButton.isHidden == true{
-            let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
-            stillImageOutput.capturePhoto(with: settings, delegate: self)
-        }
-    }
-    
-
     
 }
-
     
-    
-    
-    
-
-
