@@ -16,6 +16,7 @@ import LTMorphingLabel
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVCapturePhotoCaptureDelegate{
     
     
+    
     @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var thinkLabel: LTMorphingLabel!
@@ -222,7 +223,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 scanButton.alpha = 0
                 cameraButton.topGradient = "DoneTop"
                 cameraButton.bottomGradient = "DoneBottom"
-                cameraButton.setTitle("Done", for: .normal)
+                cameraButton.setTitle("OK", for: .normal)
                 cameraButton.setImage(nil, for: .normal)
                 scanButton.setNeedsDisplay()
                 
